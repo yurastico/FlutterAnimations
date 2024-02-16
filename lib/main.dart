@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hello_animations/animated_logo.dart';
+import 'package:hello_animations/grow_transition.dart';
+import 'package:hello_animations/logo_widget.dart';
 
 void main() => runApp(const LogoApp());
 
@@ -30,5 +32,10 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => AnimatedLogo(animation: animation);
+  Widget build(BuildContext context) {
+    return GrowTransition(
+     animation: animation,
+     child: const LogoWidget(),
+   );
+  }
 }
