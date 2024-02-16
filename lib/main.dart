@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hello_animations/animated_logo.dart';
 
 void main() => runApp(const LogoApp());
 
@@ -14,27 +15,13 @@ class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(duration: const Duration(seconds: 2),
-         vsync: this);
-
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
-      ..addListener(() {
-        setState(() {});
-      });
-
-      controller.forward();
+    controller = AnimationController(duration: const Duration(seconds: 2), vsync: this);
+    animation = Tween<double>(begin: 0, end: 300).animate(controller);
+    controller.forward();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: animation.value,
-        width: animation.value,
-        child: const FlutterLogo(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) =>
+    AnimatedLogo(animation: animation);
+  
 }
