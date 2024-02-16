@@ -14,28 +14,28 @@ class LogoApp extends StatefulWidget {
 class _LogoAppState extends State<LogoApp> with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
+
   @override
   void initState() {
     super.initState();
     controller =
         AnimationController(duration: const Duration(seconds: 2), vsync: this);
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           controller.reverse();
         } else if (status == AnimationStatus.dismissed) {
           controller.forward();
         }
-      })
-      ..addStatusListener((status) => print('$status'));
+      });
     controller.forward();
   }
 
   @override
   Widget build(BuildContext context) {
     return GrowTransition(
-     animation: animation,
-     child: const LogoWidget(),
-   );
+      animation: animation,
+      child: const LogoWidget(),
+    );
   }
 }
